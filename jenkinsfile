@@ -1,0 +1,21 @@
+pipeline{
+    agent any
+    tools{
+        maven 'M2_HOME'
+    }
+    stages{
+        stage('Build Maven'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/masterwangfive/devops-jenkins']]])
+                sh 'mvn clean install '
+            }
+        }
+        stage("Build Docker image"){
+            steps{
+                script{
+                    sh 'docker build -t javatechie/devops-integration'
+                }
+            }
+        }
+    }
+}
