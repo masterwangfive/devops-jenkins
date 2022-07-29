@@ -1,0 +1,10 @@
+package org.javase.thread;
+
+public class MyRunnable implements Runnable{
+    @Override
+    public void run() {
+        for(int i=0;i<100;i++){
+            System.out.println("我是："+Thread.currentThread().getName()+i);
+        }
+    }
+}
